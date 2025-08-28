@@ -5,7 +5,6 @@ import About from "./components/items/About"
 import Events from "./components/items/Events"
 import AlumniDirectory from "./components/items/AlumniDirectory"
 import ContactUs from "./components/items/ContactUs"
-
 function App() {
   return (
     <Router>
@@ -18,6 +17,9 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
     </Router>
+
+  
+    
   )
 }
 
