@@ -1,5 +1,4 @@
 import React from 'react';
-
 const Card = ({ src_image,heading, paragraph }) => {
   return (
     <div className="bg-white rounded-sm p-8 flex flex-col items-center text-center">

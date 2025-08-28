@@ -1,4 +1,4 @@
-import Exec_Body from "./about_comp/Exec_Body";
+import ExecBody from "./about_comp/Exec_Body";
 import VisionMission from "./about_comp/VisionMission";
 const About = () => {
   return (
@@ -7,9 +7,11 @@ const About = () => {
         About Us
       </h2>
       <VisionMission/>
-      <Exec_Body/>
-
+       <h2>Our Executive Body</h2>
+        <ExecBody/>
+    
     </div>
+  
   );
 };
 export default About;
