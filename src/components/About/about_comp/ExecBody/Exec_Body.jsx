@@ -4,7 +4,7 @@ import StdCards from './StdCards'
 const Exec_Body = () => {
   
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+    <div className="grid w-full grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {execBodyData.map((card, index) => (
         <StdCards
           key={index}

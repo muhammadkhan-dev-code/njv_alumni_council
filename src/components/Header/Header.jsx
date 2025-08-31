@@ -7,13 +7,13 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-6 h-14 flex justify-between items-center">
           
           {/* Logo + Name */}
-          <div className="flex items-center space-x-2 cursor-pointer group">
+          <div className="flex items-center space-x-2 cursor-pointer group ">
             <img
               src="/icon_logo.jpeg"
               alt="logo"
               className="h-10 w-10 rounded-full border-2 border-white shadow-sm group-hover:shadow-lg group-hover:shadow-red-500 transition duration-300"
             />
-            <span className="text-xl font-bold text-white tracking-wide font-serif group-hover:text-cyan-400 transition duration-300">
+            <span className="text-xl font-bold text-white tracking-wide font-serif group-hover:text-orange-500 transition duration-300">
               NJV Alumni Council
             </span>
           </div>
