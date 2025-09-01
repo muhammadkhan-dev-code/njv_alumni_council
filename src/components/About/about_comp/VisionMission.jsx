@@ -8,13 +8,13 @@ const VisionMission = () => {
       image_src: vision,
       heading: "Vision",
       paragraph:
-        "To inculcate in our fellows a knowledge base that cultivates: Free Thinkers, Creative Problem Solvers and Compassionate Leaders who challenge the conventional wisdom of the world.",
+        "To unite generations of NJV alumni as a vibrant community that preserves our legacy, empowers future leaders, and contributes to education and society with pride and purpose.",
     },
     {
       image_src: mission,
       heading: "Mission",
       paragraph:
-        "To empower our community through innovative education, fostering creativity, compassion, and leadership to drive transformative change worldwide.",
+        "To foster lifelong connections among alumni, provide mentorship and opportunities for students, support NJV’s growth, and uphold its tradition of excellence through collaboration, service, and shared values.",
     },
   ]);
   return (

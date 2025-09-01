@@ -7,10 +7,9 @@ const About = () => {
         About Us
       </h2>
       <VisionMission/>
-      <h2 class="text-3xl font-bold text-center text-gray-700 mt-10 tracking-tight font-serif transition-all duration-300 ease-linear hover:text-black ">
+      <h2 className="text-3xl font-bold text-center text-gray-700 mt-10 tracking-tight font-serif transition-all duration-300 ease-linear hover:text-black ">
   Our Executive Body
 </h2>
-
         <ExecBody/>
     
     </div>
