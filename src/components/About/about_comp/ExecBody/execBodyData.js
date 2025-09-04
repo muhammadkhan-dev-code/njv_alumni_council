@@ -20,7 +20,7 @@ import reppreh from '../../../../assets/images/reppreh.jpg';
 
 
 export const execBodyData = [
-  { name: "Zubair Ahmed", image: president, role:"President", shortDescription: "President" },
+  { name: "Muhammad Zubair", image: president, role:"President", shortDescription: "President" },
   { name: "Vice President", image: vicepresident, role:"Vice President", shortDescription: "Vice President" },
   { name: "General Secretary", image: generalsecretary, role:"General Secretary", shortDescription: "General Secretary" },
   { name: "Operation Manager", image: operationManager, role:"Operation Manager", shortDescription: "Operation Manager" },
