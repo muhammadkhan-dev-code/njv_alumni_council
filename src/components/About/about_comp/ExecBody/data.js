@@ -25,21 +25,22 @@ export const execBodyData = [
   { name: "General Secretary", image: generalsecretary, role:"General Secretary", shortDescription: "General Secretary" },
   { name: "Operation Manager", image: operationManager, role:"Operation Manager", shortDescription: "Operation Manager" },
   { name: "Ateeq Baloch", image: depAteeq, role:"Deputy Secretary", shortDescription: "Deputy" },
-  
   { name: "Shahid", image: financeShahid, role:"Financial Manager", shortDescription: "Finance" },
   { name: "Xalam", image: infoXalam, role:"Information Security", shortDescription: "Info Xalam" },
    { name: "Daniyal", image: mediaDaniyal, role:"Media", shortDescription: "Media Daniyal" },
   { name: "Farwa", image: mediaFarwa, role:"Media", shortDescription: "Media Farwah" },
-
   { name: "Maqsood", image: digiMaqsood, role:"Digital Manager", shortDescription: "Digital Maqsood" },
- { name: "Muhammad Khan", image: digiKhan, role:"Digital Manager", shortDescription: "Digital Khan" },
+ { name: "Muhammad Khan", image: digiKhan, role:"Digital Manager", shortDescription: "Digital Khan" }
+  ];
+export const repData=[
   { name: "Dhanraj", image: repDhanraj, role:"Representative", shortDescription: "Representative Dhanraj" },
    { name: "Muskan", image: repMuskan, role:"Representative", shortDescription: "Representative Muskan" },
-    
  { name: "Jawad Ali", image: jawadAli, role:"Representative", shortDescription: "Jawad Ali" },
    { name: "Tahmina", image: reptahmina, role:"Representative", shortDescription: "Representative Tahmina" },
    { name: "Junaid Ahmed", image: junaidAhmed, role:"Representative", shortDescription: "Junaid Ahmed" },
  { name: "Lareb", image: replareb, role:"Representative", shortDescription: "Representative Lareb" },
     { name: "Madan", image: repMadan, role:"Representative", shortDescription: "Representative Madan" },
     { name: "Preh", image: reppreh, role:"Representative", shortDescription: "Representative Preh" },
-];
+
+
+]

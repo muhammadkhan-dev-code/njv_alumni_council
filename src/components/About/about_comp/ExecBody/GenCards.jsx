@@ -1,11 +1,9 @@
 
-import { execBodyData } from './execBodyData'
 import StdCards from './StdCards'
-const Exec_Body = () => {
-  
+const GenCards = ({data}) => {
   return (
     <div className="grid w-full grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {execBodyData.map((card, index) => (
+      {data.map((card, index) => (
         <StdCards
           key={index}
           name={card.name}
@@ -14,8 +12,9 @@ const Exec_Body = () => {
           shortDescription={card.shortDescription}
         />
       ))}
+      
     </div>
   );
 };
 
-export default Exec_Body;
+export default GenCards;

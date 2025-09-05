@@ -5,7 +5,7 @@ export default function Loader() {
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300">
       <FadeLoader 
-        color="#1E90FF"
+        color="#0a79e8ff"
         height={20}
         width={15}
         radius={10}
