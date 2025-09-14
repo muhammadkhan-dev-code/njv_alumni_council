@@ -5,8 +5,7 @@ const Header = () => {
     <header className="shadow sticky z-50 top-0">
       <nav className="bg-gradient-to-r from-blue-950 to-blue-900 shadow-md sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-6 h-14 flex justify-between items-center">
-          
-          {/* Logo + Name */}
+      
           <div className="flex items-center space-x-2 cursor-pointer group ">
             <img
               src="/icon_logo.jpeg"

@@ -2,7 +2,7 @@ import React from 'react'
 import {  Send } from "lucide-react";
 const ContactForm = () => {
   return (
-    <>
+    <div>
        <div className="bg-white shadow-xl rounded-md mt-10 p-10 w-full max-w-2xl mx-auto">
           <div className="space-y-8">
             <div className="relative">
@@ -98,7 +98,7 @@ const ContactForm = () => {
             </button>
           </div>
         </div>
-    </>
+    </div>
   )
 }
 
