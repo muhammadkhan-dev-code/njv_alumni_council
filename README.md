@@ -14,7 +14,7 @@ Follow these steps to set up and run the project on your local machine:
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/your-username/Njv_Alumni.git
+   git clone https://github.com/muhammadkhan-dev-code/njv_alumni_council.git
    ```
 
 2. **Navigate to the Project Directory**  
