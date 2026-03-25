@@ -82,7 +82,7 @@ We welcome contributions to enhance the NJV Alumni Project! Here’s how to cont
 
 ### Stay Connected
 
-Have questions, suggestions, or feedback? Reach out via the [Contact Us](#) section in the application or open an issue on our [GitHub repository](https://github.com/your-username/Njv_Alumni). We’re excited to connect with you! 💬
+Have questions, suggestions, or feedback? Reach out via the [Contact Us](#) section in the application or open an issue on our [GitHub repository](https://github.com/muhammadkhandev-code/Njv_Alumni). We’re excited to connect with you! 💬
 
 ---
 

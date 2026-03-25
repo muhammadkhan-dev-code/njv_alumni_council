@@ -1,7 +1,7 @@
 import React from "react";
 const StdCards = ({ name, image, role, shortDescription }) => {
   return (
-    <div className="group relative flex flex-col bg-white shadow-md hover:shadow-2xl border border-slate-200  rounded-2xl my-6 w-72 h-[26rem] overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
+    <div className="group relative flex flex-col bg-red shadow-md hover:shadow-2xl border border-slate-200  rounded-2xl my-6 w-72 h-[26rem] overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
       <div className="relative h-1/2 w-full overflow-hidden bg-blue-950 hover:cursor-pointer ">
        <img
     src={image}

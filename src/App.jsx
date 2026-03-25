@@ -1,32 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Loader from "./components/Loader/Loader.jsx";
-import Header from "./components/Header/Header.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom'
+import Footer from './components/Footer/Footer.jsx'
+import Header from './components/Header/Header.jsx'
 
-function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loader />;
-  }
-
+function App () {
   return (
-    <>
+    <div className='min-h-screen flex flex-col bg-gray-50'>
       <Header />
-      <Outlet />
+      <main className='flex-1'>
+        <Outlet />
+      </main>
       <Footer />
-    </>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
