@@ -4,14 +4,106 @@ import {
   HeartIcon,
   UserGroupIcon
 } from '@heroicons/react/24/outline'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { alumniPosts } from '../../data/contentData'
 
 const schoolImages = {
   hero: 'https://schoolvisor.org/wp-content/uploads/2021/09/NJV-School-3.jpg',
   legacy: 'https://schoolvisor.org/wp-content/uploads/2021/09/NJV-School-3.jpg'
 }
 
+const statsConfig = [
+  {
+    key: 'alumni',
+    icon: UserGroupIcon,
+    label: 'Registered Alumni',
+    target: 5000,
+    suffix: '+'
+  },
+  {
+    key: 'legacy',
+    icon: CalendarDaysIcon,
+    label: 'Years of Legacy',
+    target: 160,
+    suffix: '+'
+  },
+  {
+    key: 'programs',
+    icon: AcademicCapIcon,
+    label: 'Mentorship Programs',
+    target: 50,
+    suffix: '+'
+  },
+  {
+    key: 'spirit',
+    icon: HeartIcon,
+    label: 'NJV Spirit',
+    target: 100,
+    suffix: '%'
+  }
+]
+
+const initialStats = statsConfig.reduce((accumulator, stat) => {
+  accumulator[stat.key] = 0
+  return accumulator
+}, {})
+
 export default function Home () {
+  const [animatedStats, setAnimatedStats] = useState(initialStats)
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const statsSectionRef = useRef(null)
+
+  useEffect(() => {
+    const node = statsSectionRef.current
+    if (!node || hasAnimated) return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const [entry] = entries
+        if (!entry?.isIntersecting) return
+
+        setHasAnimated(true)
+        observer.disconnect()
+      },
+      {
+        threshold: 0.35
+      }
+    )
+
+    observer.observe(node)
+
+    return () => observer.disconnect()
+  }, [hasAnimated])
+
+  useEffect(() => {
+    if (!hasAnimated) return
+
+    const duration = 1700
+    const startTime = performance.now()
+
+    const step = currentTime => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const easedProgress = 1 - Math.pow(1 - progress, 3)
+
+      const nextStats = statsConfig.reduce((accumulator, stat) => {
+        accumulator[stat.key] = Math.floor(stat.target * easedProgress)
+        return accumulator
+      }, {})
+
+      setAnimatedStats(nextStats)
+
+      if (progress < 1) {
+        globalThis.requestAnimationFrame(step)
+      }
+    }
+
+    const animationId = globalThis.requestAnimationFrame(step)
+
+    return () => globalThis.cancelAnimationFrame(animationId)
+  }, [hasAnimated])
+
   return (
     <div className='w-full flex flex-col items-center bg-gray-50'>
       {/* Hero Section */}
@@ -77,30 +169,71 @@ export default function Home () {
         </div>
       </section>
 
+      {/* Latest Posts Section */}
+      <section className='w-full max-w-7xl mx-auto py-20 px-6'>
+        <div className='flex items-end justify-between gap-4 mb-10 flex-wrap'>
+          <div>
+            <p className='text-sm uppercase tracking-[0.3em] text-blue-900 font-semibold mb-2'>
+              Latest from NJV Alumni
+            </p>
+            <h2 className='text-4xl font-bold text-gray-800 font-serif'>
+              Stories, Milestones and Opportunities
+            </h2>
+          </div>
+          <Link
+            to='/events'
+            className='text-blue-900 hover:text-blue-700 font-semibold transition'
+          >
+            Explore all updates
+          </Link>
+        </div>
+
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          {alumniPosts.map(post => (
+            <article
+              key={post.id}
+              className='bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col group'
+            >
+              <div className='h-52 overflow-hidden'>
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className='w-full h-full object-cover group-hover:scale-105 transition duration-500'
+                />
+              </div>
+              <div className='p-6 flex flex-col flex-1'>
+                <h3 className='text-xl font-bold text-gray-900 mb-3 leading-snug'>
+                  {post.title}
+                </h3>
+                <p className='text-gray-600 mb-6 flex-1'>{post.excerpt}</p>
+                <Link
+                  to={`/posts/${post.slug}`}
+                  className='inline-flex items-center justify-center bg-blue-900 hover:bg-blue-800 text-white font-semibold px-5 py-2 rounded-lg transition'
+                >
+                  Learn More
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       {/* Stats Section */}
-      <section className='w-full bg-blue-900 py-16'>
+      <section ref={statsSectionRef} className='w-full bg-blue-900 py-16'>
         <div className='max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center'>
-          <div className='flex flex-col items-center'>
-            <UserGroupIcon className='w-12 h-12 text-yellow-400 mb-4' />
-            <span className='text-4xl font-bold text-white mb-2'>5000+</span>
-            <span className='text-blue-200'>Registered Alumni</span>
-          </div>
-          <div className='flex flex-col items-center'>
-            <CalendarDaysIcon className='w-12 h-12 text-yellow-400 mb-4' />
-            <span className='text-4xl font-bold text-white mb-2'>160+</span>
-            <span className='text-blue-200'>Years of Legacy</span>
-          </div>
-          <div className='flex flex-col items-center'>
-            <AcademicCapIcon className='w-12 h-12 text-yellow-400 mb-4' />
-            <span className='text-4xl font-bold text-white mb-2'>50+</span>
-            <span className='text-blue-200'>Mentorship Programs</span>
-          </div>
-          <div className='flex flex-col items-center'>
-            <HeartIcon className='w-12 h-12 text-yellow-400 mb-4' />
-            <span className='text-4xl font-bold text-white mb-2'>100%</span>
-            <span className='text-blue-200'>NJV Spirit</span>
-          </div>
+          {statsConfig.map(stat => {
+            const StatIcon = stat.icon
+            return (
+              <div key={stat.key} className='flex flex-col items-center'>
+                <StatIcon className='w-12 h-12 text-yellow-400 mb-4' />
+                <span className='text-4xl font-bold text-white mb-2'>
+                  {animatedStats[stat.key]}
+                  {stat.suffix}
+                </span>
+                <span className='text-blue-200'>{stat.label}</span>
+              </div>
+            )
+          })}
         </div>
       </section>
 
@@ -113,12 +246,20 @@ export default function Home () {
           Don't miss out on upcoming reunions, networking events, and the latest
           news from the NJV Alumni community.
         </p>
-        <Link
-          to='/contact-us'
-          className='bg-blue-950 hover:bg-blue-800 text-white font-semibold px-10 py-4 rounded-full shadow-lg transition duration-300 text-lg'
-        >
-          Get In Touch
-        </Link>
+        <div className='flex gap-4 flex-wrap items-center justify-center'>
+          <Link
+            to='/contact-us'
+            className='bg-blue-950 hover:bg-blue-800 text-white font-semibold px-10 py-4 rounded-full shadow-lg transition duration-300 text-lg'
+          >
+            Get In Touch
+          </Link>
+          <Link
+            to='/donate'
+            className='bg-yellow-500 hover:bg-orange-500 text-black font-semibold px-10 py-4 rounded-full shadow-lg transition duration-300 text-lg'
+          >
+            Donate Now
+          </Link>
+        </div>
       </section>
     </div>
   )
