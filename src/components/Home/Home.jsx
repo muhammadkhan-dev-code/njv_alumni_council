@@ -107,7 +107,7 @@ export default function Home () {
   return (
     <div className='w-full flex flex-col items-center bg-gray-50'>
       {/* Hero Section */}
-      <section className='relative w-full h-[600px] flex items-center justify-center bg-blue-950 overflow-hidden'>
+      <section className='relative w-full min-h-[520px] sm:min-h-[600px] flex items-center justify-center bg-blue-950 overflow-hidden'>
         <div className='absolute inset-0 z-0'>
           <img
             src={schoolImages.hero}
@@ -115,24 +115,24 @@ export default function Home () {
             className='w-full h-full object-cover opacity-30'
           />
         </div>
-        <div className='relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center'>
-          <h1 className='text-5xl md:text-6xl font-extrabold text-white mb-6 font-serif tracking-tight drop-shadow-lg'>
+        <div className='relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto flex flex-col items-center'>
+          <h1 className='text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 font-serif tracking-tight drop-shadow-lg'>
             Welcome to the NJV Alumni Council
           </h1>
-          <p className='text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl font-light'>
+          <p className='text-base sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-10 max-w-2xl font-light'>
             Uniting former students on a single platform where memories,
             experiences, and aspirations converge.
           </p>
           <div className='flex gap-4 flex-wrap justify-center'>
             <Link
               to='/alumni-directory'
-              className='bg-yellow-500 hover:bg-orange-500 text-black font-semibold px-8 py-3 rounded-full shadow-lg transition duration-300 transform hover:-translate-y-1 text-lg'
+              className='bg-yellow-500 hover:bg-orange-500 text-black font-semibold px-6 sm:px-8 py-3 rounded-full shadow-lg transition duration-300 transform hover:-translate-y-1 text-base sm:text-lg'
             >
               Find Alumni
             </Link>
             <Link
               to='/about'
-              className='bg-transparent border-2 border-white hover:bg-white hover:text-blue-950 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition duration-300 transform hover:-translate-y-1 text-lg'
+              className='bg-transparent border-2 border-white hover:bg-white hover:text-blue-950 text-white font-semibold px-6 sm:px-8 py-3 rounded-full shadow-lg transition duration-300 transform hover:-translate-y-1 text-base sm:text-lg'
             >
               Learn More
             </Link>
@@ -141,10 +141,10 @@ export default function Home () {
       </section>
 
       {/* Introduction Section */}
-      <section className='w-full max-w-7xl mx-auto py-20 px-6'>
+      <section className='w-full max-w-7xl mx-auto py-14 sm:py-20 px-4 sm:px-6'>
         <div className='flex flex-col md:flex-row gap-12 items-center'>
           <div className='flex-1'>
-            <h2 className='text-4xl font-bold text-gray-800 mb-6 font-serif'>
+            <h2 className='text-3xl sm:text-4xl font-bold text-gray-800 mb-6 font-serif'>
               Preserving Our Legacy
             </h2>
             <p className='text-lg text-gray-600 leading-relaxed mb-6'>
@@ -170,13 +170,13 @@ export default function Home () {
       </section>
 
       {/* Latest Posts Section */}
-      <section className='w-full max-w-7xl mx-auto py-20 px-6'>
+      <section className='w-full max-w-7xl mx-auto py-14 sm:py-20 px-4 sm:px-6'>
         <div className='flex items-end justify-between gap-4 mb-10 flex-wrap'>
           <div>
             <p className='text-sm uppercase tracking-[0.3em] text-blue-900 font-semibold mb-2'>
               Latest from NJV Alumni
             </p>
-            <h2 className='text-4xl font-bold text-gray-800 font-serif'>
+            <h2 className='text-3xl sm:text-4xl font-bold text-gray-800 font-serif'>
               Stories, Milestones and Opportunities
             </h2>
           </div>
@@ -220,13 +220,13 @@ export default function Home () {
 
       {/* Stats Section */}
       <section ref={statsSectionRef} className='w-full bg-blue-900 py-16'>
-        <div className='max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center'>
           {statsConfig.map(stat => {
             const StatIcon = stat.icon
             return (
               <div key={stat.key} className='flex flex-col items-center'>
                 <StatIcon className='w-12 h-12 text-yellow-400 mb-4' />
-                <span className='text-4xl font-bold text-white mb-2'>
+                <span className='text-3xl sm:text-4xl font-bold text-white mb-2'>
                   {animatedStats[stat.key]}
                   {stat.suffix}
                 </span>
@@ -238,8 +238,8 @@ export default function Home () {
       </section>
 
       {/* Call to Action */}
-      <section className='w-full py-20 bg-white text-center px-6'>
-        <h2 className='text-4xl font-bold text-gray-800 mb-6 font-serif'>
+      <section className='w-full py-14 sm:py-20 bg-white text-center px-4 sm:px-6'>
+        <h2 className='text-3xl sm:text-4xl font-bold text-gray-800 mb-6 font-serif'>
           Stay Connected
         </h2>
         <p className='text-lg text-gray-600 mb-10 max-w-2xl mx-auto'>
@@ -249,13 +249,13 @@ export default function Home () {
         <div className='flex gap-4 flex-wrap items-center justify-center'>
           <Link
             to='/contact-us'
-            className='bg-blue-950 hover:bg-blue-800 text-white font-semibold px-10 py-4 rounded-full shadow-lg transition duration-300 text-lg'
+            className='bg-blue-950 hover:bg-blue-800 text-white font-semibold px-8 sm:px-10 py-4 rounded-full shadow-lg transition duration-300 text-base sm:text-lg'
           >
             Get In Touch
           </Link>
           <Link
             to='/donate'
-            className='bg-yellow-500 hover:bg-orange-500 text-black font-semibold px-10 py-4 rounded-full shadow-lg transition duration-300 text-lg'
+            className='bg-yellow-500 hover:bg-orange-500 text-black font-semibold px-8 sm:px-10 py-4 rounded-full shadow-lg transition duration-300 text-base sm:text-lg'
           >
             Donate Now
           </Link>

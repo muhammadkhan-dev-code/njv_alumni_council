@@ -3,10 +3,10 @@ import EventCard from './Event_Comp/EventCard.jsx'
 
 export default function Events () {
   return (
-    <div className='w-full min-h-screen bg-gray-50 py-16'>
-      <div className='max-w-7xl mx-auto px-6'>
-        <div className='text-center mb-16 space-y-4'>
-          <h1 className='text-5xl font-extrabold text-blue-950 font-serif tracking-tight'>
+    <div className='w-full min-h-screen bg-gray-50 py-12 sm:py-16'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+        <div className='text-center mb-12 sm:mb-16 space-y-4'>
+          <h1 className='text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 font-serif tracking-tight'>
             Upcoming Events
           </h1>
           <p className='text-lg text-gray-600 max-w-2xl mx-auto'>

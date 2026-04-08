@@ -1,108 +1,101 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useState } from 'react';
-import AlumniCard from './Directory_Comp/AlumniCard';
+import AlumniCard from './Directory_Comp/AlumniCard'
+import { dummyAlumni } from './alumni_data'
 
-const dummyAlumni = [
-  { id: 1, name: "Ali Khan", batch: "2015", profession: "Software Engineer at Google", location: "San Francisco, USA" },
-  { id: 2, name: "Sara Ahmed", batch: "2018", profession: "Marketing Director", location: "Dubai, UAE" },
-  { id: 3, name: "Usman Tariq", batch: "2010", profession: "Founder & CEO, TechHub", location: "Karachi, Pakistan" },
-  { id: 4, name: "Aisha Rehman", batch: "2020", profession: "Data Scientist", location: "London, UK" },
-  { id: 5, name: "Bilal Hashmi", batch: "2015", profession: "Investment Banker", location: "New York, USA" },
-  { id: 6, name: "Fatima Noor", batch: "2012", profession: "Medical Doctor", location: "Toronto, Canada" },
-  { id: 7, name: "Zainab Malik", batch: "2018", profession: "Architect", location: "Karachi, Pakistan" },
-  { id: 8, name: "Omar Farooq", batch: "2016", profession: "UX Designer", location: "Berlin, Germany" }
-];
-
-export default function AlumniDirectory() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterBatch, setFilterBatch] = useState("All");
-
-  const batchYears = [...new Set(dummyAlumni.map(a => a.batch))].sort(
-    (firstBatch, secondBatch) => Number(secondBatch) - Number(firstBatch)
-  );
-  const batches = ["All", ...batchYears];
-
-  const filteredAlumni = dummyAlumni.filter(alumni => {
-    const matchesSearch = alumni.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          alumni.profession.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesBatch = filterBatch === "All" || alumni.batch === filterBatch;
-    return matchesSearch && matchesBatch;
-  });
+export default function AlumniDirectory () {
+  const filteredAlumni = dummyAlumni
+  const totalAlumni = filteredAlumni.length
+  const universityCount = new Set(
+    filteredAlumni.map(alumni => alumni.university)
+  ).size
+  const latestPassoutYear = filteredAlumni.reduce((latestYear, alumni) => {
+    const year = Number(alumni.passoutYear)
+    return Number.isFinite(year) && year > latestYear ? year : latestYear
+  }, 0)
 
   return (
-    <div className="w-full min-h-screen bg-[#f8fafc] py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-blue-950 font-serif tracking-tight mb-4">
-            Alumni Directory
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Connect, collaborate, and grow with the widespread network of NJV Alumni across the globe.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 mb-10">
-          <h3 className="text-2xl font-bold text-blue-950 font-serif mb-3 text-center">Why This Directory Matters</h3>
-          <p className="text-gray-600 text-center max-w-3xl mx-auto leading-relaxed">
-            This directory helps alumni discover peers by profession and graduation year, creating a practical network for mentorship, hiring, collaboration, and community support.
-          </p>
-        </div>
-
-        {/* Search & Filter Section */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-12 flex flex-col md:flex-row gap-4 justify-between items-center">
-          
-          <div className="relative w-full md:w-1/2">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
+    <div className='w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-blue-50/40 py-16'>
+      <div className='max-w-7xl mx-auto px-6'>
+        <section className='relative overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-[0_20px_70px_-35px_rgba(15,23,42,0.35)] mb-10'>
+          <div className='absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.12),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(245,158,11,0.10),_transparent_32%)]' />
+          <div className='relative grid gap-8 lg:grid-cols-[1.35fr_0.85fr] p-8 md:p-12'>
+            <div className='space-y-5'>
+              <span className='inline-flex w-fit rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-sm font-semibold tracking-wide text-blue-800'>
+                NJV Alumni Network
+              </span>
+              <div className='space-y-4'>
+                <h1 className='max-w-2xl text-4xl md:text-6xl font-extrabold tracking-tight text-slate-950 font-serif leading-tight'>
+                  Meet alumni who are building their future at universities
+                  around the world.
+                </h1>
+                <p className='max-w-2xl text-base md:text-lg leading-8 text-slate-600'>
+                  Explore passout year, current study year, and university
+                  details in one clean directory designed to help alumni stay
+                  connected, discover common paths, and support one another.
+                </p>
+              </div>
             </div>
-            <input
-              type="text"
-              placeholder="Search by name or profession..."
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
 
-          <div className="w-full md:w-auto flex items-center gap-3">
-            <label htmlFor="batch-filter" className="text-gray-600 font-medium whitespace-nowrap">Class of:</label>
-            <select
-              id="batch-filter"
-              className="w-full md:w-48 py-3 px-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white cursor-pointer transition"
-              value={filterBatch}
-              onChange={(e) => setFilterBatch(e.target.value)}
-            >
-              {batches.map(batch => (
-                <option key={batch} value={batch}>{batch}</option>
-              ))}
-            </select>
+            <div className='grid gap-4 self-end sm:grid-cols-3 lg:grid-cols-1'>
+              <div className='rounded-2xl border border-blue-100 bg-blue-50/80 p-5 shadow-sm'>
+                <p className='text-sm font-medium text-blue-700'>
+                  Total Alumni
+                </p>
+                <p className='mt-2 text-3xl font-bold text-slate-950'>
+                  {totalAlumni}
+                </p>
+              </div>
+              <div className='rounded-2xl border border-amber-100 bg-amber-50/80 p-5 shadow-sm'>
+                <p className='text-sm font-medium text-amber-700'>
+                  Universities
+                </p>
+                <p className='mt-2 text-3xl font-bold text-slate-950'>
+                  {universityCount}
+                </p>
+              </div>
+              <div className='rounded-2xl border border-emerald-100 bg-emerald-50/80 p-5 shadow-sm'>
+                <p className='text-sm font-medium text-emerald-700'>
+                  Latest Passout
+                </p>
+                <p className='mt-2 text-3xl font-bold text-slate-950'>
+                  {latestPassoutYear || 'N/A'}
+                </p>
+              </div>
+            </div>
           </div>
-          
-        </div>
+        </section>
+
+        <section className='bg-white/90 backdrop-blur rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8 mb-10'>
+          <div className='mx-auto max-w-4xl text-center'>
+            <h3 className='text-2xl md:text-3xl font-bold text-slate-950 font-serif mb-3'>
+              Why This Directory Helps
+            </h3>
+            <p className='text-slate-600 leading-relaxed md:text-lg'>
+              Stay connected with NJV alumni as they continue their studies at
+              universities across the world. Discover passout year, current
+              study year, and university details in one place to support
+              mentorship, collaboration, and lasting community bonds.
+            </p>
+          </div>
+        </section>
 
         {/* Directory Grid */}
         {filteredAlumni.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-8'>
             {filteredAlumni.map(alumni => (
               <AlumniCard key={alumni.id} alumni={alumni} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-white rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">No Alumni Found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
-            <button 
-              onClick={() => { setSearchTerm(""); setFilterBatch("All"); }}
-              className="mt-4 text-blue-600 hover:underline font-medium cursor-pointer"
-            >
-              Clear Filters
-            </button>
+          <div className='text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100'>
+            <h3 className='text-2xl font-bold text-slate-900 mb-2'>
+              No Alumni Found
+            </h3>
+            <p className='text-slate-500'>
+              Alumni data is currently unavailable.
+            </p>
           </div>
         )}
-
       </div>
     </div>
-  );
+  )
 }

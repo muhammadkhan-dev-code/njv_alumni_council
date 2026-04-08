@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function EventCard ({ event }) {
   return (
     <div className='bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-[1.02] transition duration-300'>
-      <div className='h-48 overflow-hidden relative'>
+      <div className='h-44 sm:h-48 overflow-hidden relative'>
         <img
           src={
             event.image ||
@@ -21,8 +21,8 @@ export default function EventCard ({ event }) {
           {event.type}
         </div>
       </div>
-      <div className='p-6 flex flex-col h-[280px]'>
-        <h3 className='text-xl font-bold text-blue-950 mb-2 font-serif line-clamp-2'>
+      <div className='p-4 sm:p-6 flex flex-col min-h-[260px]'>
+        <h3 className='text-lg sm:text-xl font-bold text-blue-950 mb-2 font-serif line-clamp-2'>
           {event.title}
         </h3>
         <div className='flex items-center text-gray-500 text-sm mb-2'>

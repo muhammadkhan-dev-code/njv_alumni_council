@@ -1,4 +1,8 @@
 import { useMemo, useState } from 'react'
+import BankDetailsCard from './Donate_Comp/BankDetailsCard'
+import DonationAmountSelector from './Donate_Comp/DonationAmountSelector'
+import DonorFields from './Donate_Comp/DonorFields'
+import PaymentMethodSelector from './Donate_Comp/PaymentMethodSelector'
 
 const presetAmounts = [1000, 2500, 5000, 10000]
 
@@ -88,14 +92,15 @@ export default function Donate () {
       100000 + Math.random() * 900000
     )}`
 
-    const methodInstruction =
-      form.paymentMethod === 'easypaisa'
-        ? `Send PKR ${finalAmount} to our Easypaisa number ${bankDetails.easypaisa}.`
-        : form.paymentMethod === 'jazzcash'
-        ? `Send PKR ${finalAmount} to our JazzCash number ${bankDetails.jazzCash}.`
-        : form.paymentMethod === 'bank-transfer'
-        ? `Transfer PKR ${finalAmount} to ${bankDetails.bankName} (IBAN: ${bankDetails.iban}).`
-        : `Use your debit or credit card to complete PKR ${finalAmount} and share the transaction receipt.`
+    let methodInstruction = `Use your debit or credit card to complete PKR ${finalAmount} and share the transaction receipt.`
+
+    if (form.paymentMethod === 'easypaisa') {
+      methodInstruction = `Send PKR ${finalAmount} to our Easypaisa number ${bankDetails.easypaisa}.`
+    } else if (form.paymentMethod === 'jazzcash') {
+      methodInstruction = `Send PKR ${finalAmount} to our JazzCash number ${bankDetails.jazzCash}.`
+    } else if (form.paymentMethod === 'bank-transfer') {
+      methodInstruction = `Transfer PKR ${finalAmount} to ${bankDetails.bankName} (IBAN: ${bankDetails.iban}).`
+    }
 
     setStatus({
       type: 'success',
@@ -118,35 +123,7 @@ export default function Donate () {
             Your contribution in PKR supports scholarships, campus facilities,
             and alumni-led student opportunities at NJV.
           </p>
-
-          <div className='space-y-4'>
-            <h2 className='text-xl font-semibold text-slate-900'>
-              Bank and UPI Details
-            </h2>
-            <div className='rounded-2xl border border-blue-200 bg-blue-50 p-5 space-y-2 text-slate-800'>
-              <p>
-                <strong>Account Name:</strong> {bankDetails.accountName}
-              </p>
-              <p>
-                <strong>Account Number:</strong> {bankDetails.accountNumber}
-              </p>
-              <p>
-                <strong>IBAN:</strong> {bankDetails.iban}
-              </p>
-              <p>
-                <strong>Bank:</strong> {bankDetails.bankName}
-              </p>
-              <p>
-                <strong>Branch Code:</strong> {bankDetails.branchCode}
-              </p>
-              <p>
-                <strong>Easypaisa:</strong> {bankDetails.easypaisa}
-              </p>
-              <p>
-                <strong>JazzCash:</strong> {bankDetails.jazzCash}
-              </p>
-            </div>
-          </div>
+          <BankDetailsCard bankDetails={bankDetails} />
         </div>
 
         <form
@@ -157,82 +134,23 @@ export default function Donate () {
             Complete Your Donation
           </h2>
 
-          <div>
-            <p className='text-sm font-medium text-slate-700 mb-3'>
-              Select Amount (PKR)
-            </p>
-            <div className='grid grid-cols-2 sm:grid-cols-4 gap-3'>
-              {presetAmounts.map(amount => (
-                <button
-                  key={amount}
-                  type='button'
-                  onClick={() => {
-                    setSelectedAmount(amount)
-                    setCustomAmount('')
-                  }}
-                  className={`rounded-xl border px-4 py-3 font-semibold transition ${
-                    selectedAmount === amount && !customAmount
-                      ? 'bg-blue-900 text-white border-blue-900'
-                      : 'bg-white text-slate-800 border-slate-300 hover:border-blue-600'
-                  }`}
-                >
-                  {amount}
-                </button>
-              ))}
-            </div>
-            <input
-              type='number'
-              min='500'
-              value={customAmount}
-              onChange={e => setCustomAmount(e.target.value)}
-              placeholder='Or enter custom amount'
-              className='mt-3 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-700'
-            />
-            {errors.amount && (
-              <p className='text-red-600 text-sm mt-2'>{errors.amount}</p>
-            )}
-          </div>
+          <DonationAmountSelector
+            presetAmounts={presetAmounts}
+            selectedAmount={selectedAmount}
+            customAmount={customAmount}
+            onSelectAmount={amount => {
+              setSelectedAmount(amount)
+              setCustomAmount('')
+            }}
+            onCustomAmountChange={setCustomAmount}
+            amountError={errors.amount}
+          />
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-            <input
-              type='text'
-              name='fullName'
-              value={form.fullName}
-              onChange={handleField}
-              placeholder='Full name'
-              className='rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-700'
-            />
-            <input
-              type='email'
-              name='email'
-              value={form.email}
-              onChange={handleField}
-              placeholder='Email address'
-              className='rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-700'
-            />
-            <input
-              type='tel'
-              name='phone'
-              value={form.phone}
-              onChange={handleField}
-              placeholder='Phone number'
-              className='rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-700'
-            />
-            <input
-              type='text'
-              name='batch'
-              value={form.batch}
-              onChange={handleField}
-              placeholder='Passing year or batch'
-              className='rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-700'
-            />
-          </div>
-          {errors.fullName && (
-            <p className='text-red-600 text-sm -mt-3'>{errors.fullName}</p>
-          )}
-          {errors.email && (
-            <p className='text-red-600 text-sm -mt-3'>{errors.email}</p>
-          )}
+          <DonorFields
+            form={form}
+            onFieldChange={handleField}
+            errors={errors}
+          />
 
           <select
             name='focusArea'
@@ -247,35 +165,11 @@ export default function Donate () {
             ))}
           </select>
 
-          <div>
-            <p className='text-sm font-medium text-slate-700 mb-3'>
-              Payment method
-            </p>
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
-              {['easypaisa', 'jazzcash', 'bank-transfer', 'card'].map(
-                method => (
-                  <label
-                    key={method}
-                    className={`rounded-xl border px-4 py-3 cursor-pointer text-center font-medium transition ${
-                      form.paymentMethod === method
-                        ? 'bg-amber-100 border-amber-500 text-slate-900'
-                        : 'border-slate-300 text-slate-700 hover:border-amber-500'
-                    }`}
-                  >
-                    <input
-                      type='radio'
-                      name='paymentMethod'
-                      value={method}
-                      checked={form.paymentMethod === method}
-                      onChange={handleField}
-                      className='sr-only'
-                    />
-                    {paymentMethodLabels[method]}
-                  </label>
-                )
-              )}
-            </div>
-          </div>
+          <PaymentMethodSelector
+            selectedMethod={form.paymentMethod}
+            paymentMethodLabels={paymentMethodLabels}
+            onFieldChange={handleField}
+          />
 
           <textarea
             name='message'
